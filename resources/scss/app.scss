@@ -1,1 +1,7 @@
-@import '~bootstrap/scss/bootstrap'
+@use '~bootstrap/scss/bootstrap';
+
+//Colori e regole generali
+@use "./partials/layout.scss";
+
+//Header e footer
+@use "./partials/app.scss";
