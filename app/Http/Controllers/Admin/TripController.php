@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTripRequest;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TripController extends Controller
 {
@@ -36,8 +37,12 @@ class TripController extends Controller
     public function store(StoreTripRequest $request)
     {
         $form_data = $request->validated();
-        $form_data['slug'] = Trip::getSlug($form_data['title']);
         $form_data['user_id'] = Auth::user()->id;
+
+        if ($request->hasFile('thumb')) {
+            $image_path = Storage::disk('public')->put('thumb_images', $request->thumb);
+            $form_data['thumb'] = $image_path;
+        }
 
         $new_trip = Trip::create($form_data);
 
@@ -66,6 +71,12 @@ class TripController extends Controller
     public function update(UpdateTripRequest $request, Trip $trip)
     {
         $form_data = $request->validated();
+
+        if ($request->hasFile('thumb')) {
+            $image_path = Storage::disk('public')->put('thumb_images', $request->thumb);
+            $form_data['thumb'] = $image_path;
+        }
+
         $trip->update($form_data);
 
         return to_route('admin.trips.show', $trip);

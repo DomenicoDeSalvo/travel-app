@@ -22,15 +22,19 @@
                     @foreach ($trips as $trip)
                     <div class="col m-auto m-sm-0 d-flex align-items-stretch">
                         <div class="card flex-fill mb-3">
-                            @if(is_null($trip->thumb))
-                                <div> poi ci penso </div>
-                            @else
-                                <img src="{{$trip->thumb}}" alt="{{$trip->location}}">
-                            @endif
+                            <a href="{{route('admin.trips.show', $trip)}}" class="thumb link-underline link-underline-opacity-0">
+                                @if(is_null($trip->thumb))
+                                    <img src="{{asset('/img/Logo.png')}}" alt="{{$trip->location}}">
+                                @else
+                                <figure>
+                                    <img src="{{asset('storage/'.$trip->thumb)}}" alt="{{$trip->location}}">
+                                </figure>
+                                @endif
+                            </a>
                             <div class="card-body">
-                                <div class="fw-bold fs-3">
-                                    {{$trip->location}}
-                                </div>
+                                <a href="{{route('admin.trips.show', $trip)}}" class="link-underline link-underline-opacity-0">
+                                    <div class="fw-bold fs-3">{{$trip->location}}</div>
+                                </a>
                                 <div class="dates">
                                     <span>
                                         {{$trip->start_date}} - 
