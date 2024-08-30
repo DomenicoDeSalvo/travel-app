@@ -32,20 +32,11 @@
                     <label for="rooms">Data di fine</label>
                     <input type="date" class="form-control" id="end_date" name="end_date" placeholder="Data fine viaggio" value="{{ old('end_date') }}">
                 </div>
-            </div>
-            {{-- <div class="form-group mb-4">
-                <label for="address">Indirizzo *</label>
-                <address-component
-                    :initial-address="'{{ old('address') }}'"
-                    :initial-latitude="{{ old('latitude') }}"
-                    :initial-longitude="{{ old('longitude') }}"
-                ></address-component>
-            </div> --}}
-            
+            </div>          
             <div class="form-group mb-4">
                 <label for="thumb" class="form-label">Anteprima</label>
                 <input class="form-control" type="file" id="thumb" name="thumb" >
-              </div>
+            </div>
             <div class="mb-4 fw-lighter">
                 <p>
                     I campi contrassegnati con l'asterisco (*) sono obbligatori

@@ -3,22 +3,33 @@
         display: inline-block;
     }
 
-    .thumb {
-        display: inline-block;
-        overflow: hidden;
-        max-height: 66%;
+    .card{
+        aspect-ratio: 1;
+      
     }
 
-    img{
-        object-fit:cover;
-        max-width: 100%;
-        display: block;
-        overflow: hidden;
-        &:hover{
-            transform: scale(1.05);
-            opacity: 0.5;
-            overflow: hidden;
-        }      
+    .card-body{
+        background-image: url(../img/post.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
     }
+
+    // .thumb {
+    //     display: inline-block;
+    //     overflow: hidden;
+    //     max-height: 66%;
+    // }
+
+    // img{
+    //     object-fit:cover;
+    //     max-width: 100%;
+    //     display: block;
+    //     overflow: hidden;
+    //     &:hover{
+    //         transform: scale(1.05);
+    //         opacity: 0.5;
+    //         overflow: hidden;
+    //     }      
+    // }
 
 }
