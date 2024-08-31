@@ -19,8 +19,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+            MoodSeeder::class,
             UserSeeder::class,
             TripSeeder::class,
+            DaySeeder::class
         ]);
     }
 }

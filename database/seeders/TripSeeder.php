@@ -22,11 +22,7 @@ class TripSeeder extends Seeder
             $new_trip = new Trip();
             $new_trip->user_id = $faker->randomElement($user_ids);
             $new_trip->location = $faker->city();
-            if ($faker->boolean(90)) {
-                $new_trip->thumb = $faker->imageUrl();
-            } else {
-                $new_trip->thumb = null;
-            }
+            $new_trip->thumb = $faker->optional(weight: 0.9)->imageUrl();
             $new_trip->description = $faker->paragraph();
             $new_trip->start_date = $faker->dateTime();
             if ($faker->boolean(90)) {

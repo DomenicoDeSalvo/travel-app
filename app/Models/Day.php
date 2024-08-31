@@ -5,26 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Trip extends Model
+class Day extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'location',
-        'thumb',
+        'title',
         'description',
-        'start_date',
-        'end_date',
+        'date',
+        'trip_id',
+        'mood_id',
         'user_id'
     ];
 
-    public function user()
+    public function mood()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Mood::class);
     }
 
-    public function days()
+    public function trip()
     {
-        return $this->hasMany(Day::class);
+        return $this->belongsTo(Trip::class);
     }
 }

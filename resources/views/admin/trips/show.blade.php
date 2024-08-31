@@ -7,7 +7,10 @@
     <section class="show">
         <div class="container">
             <div class="row justify-content-end">
-                <h1 class="title text-center col-8 py-5 ">{{($trip->location)}}</h1>
+                <div class="col-2 my-auto">
+                    <button><a href="{{route('admin.days.create',$trip)}}">Aggiungi tappa</a></button>
+                </div>
+                <h2 class="title text-center col-8 py-5 ">{{($trip->location)}}</h2>
                 <div class="col-2 my-auto">
                     <div class="d-flex justify-content-evenly  align-items-center gap-3">
                         <button><a href="{{route('admin.trips.edit',$trip)}}">Modifica</a></button>
