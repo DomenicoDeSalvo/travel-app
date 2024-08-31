@@ -67,6 +67,7 @@ class DayController extends Controller
         if ($day->user_id !== Auth::id()) {
             return to_route('admin.trips.index');
         }
+        $day->load('trip', 'mood');
 
         $moods = Mood::all();
 
@@ -78,7 +79,10 @@ class DayController extends Controller
      */
     public function edit(Day $day)
     {
-        return view('admin.days.show', compact('day'));
+
+        $moods = Mood::all();
+
+        return view('admin.days.edit', compact('day' ,'moods' ));
 
     }
 

@@ -12,7 +12,7 @@
         <form action="{{route('admin.days.store')}}" method="POST">
             @csrf
 
-            <input type="text" id="trip_id" name="trip_id" value="{{$trip_id}}">
+            <input type="hidden" id="trip_id" name="trip_id" value="{{$trip_id}}">
     
             <div class="form-group mb-4">
                 <label for="title">Titolo *</label>
