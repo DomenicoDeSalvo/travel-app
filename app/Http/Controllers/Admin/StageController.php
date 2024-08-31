@@ -55,9 +55,10 @@ class StageController extends Controller
             $form_data['mood_id'] = $request->mood;
         }
 
+        
         $new_stage = Stage::create($form_data);
 
-        return to_route('admin.stage.show', $new_stage);
+        return to_route('admin.days.show', $day->id);
 }
 
     /**
@@ -102,7 +103,9 @@ class StageController extends Controller
         
         $stage->update($form_data);
 
-        return to_route('admin.stages.show', $stage);
+        $day = $stage->day;
+
+        return to_route('admin.days.show', $day->id);
 
     }
 

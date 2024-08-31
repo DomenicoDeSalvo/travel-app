@@ -25,4 +25,9 @@ class Stage extends Model
     {
         return $this->belongsTo(Day::class);
     }
+
+    public function mood()
+    {
+        return $this->belongsTo(Mood::class);
+    }
 }

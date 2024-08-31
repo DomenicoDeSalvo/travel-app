@@ -13,4 +13,9 @@ class Mood extends Model
     {
         return $this->hasMany(Day::class);
     }
+
+    public function stages()
+    {
+        return $this->hasMany(Stage::class);
+    }
 }

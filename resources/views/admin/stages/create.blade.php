@@ -6,7 +6,7 @@
 <section class="create">
 
     <div class="container">
-        <h3>Aggiungi una giornata</h3>
+        <h3>Aggiungi una tappa</h3>
     </div>
     <div class="container">
         <form action="{{route('admin.stages.store')}}" method="POST">
