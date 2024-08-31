@@ -25,9 +25,9 @@ class StoreDayRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'user_id' => 'exist:users,id',
-            'mood_id' => 'exist:mood,id',
-            'trip_id' => 'exist:trip,id',
+            'user_id' => 'exists:users,id',
+            'mood_id' => 'nullable|exists:moods,id',
+            'trip_id' => 'required|exists:trips,id',
         ];
     }
 }

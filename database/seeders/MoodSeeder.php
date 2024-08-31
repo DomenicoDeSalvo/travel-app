@@ -13,7 +13,7 @@ class MoodSeeder extends Seeder
      */
     public function run(): void
     {
-        $moods = ['Felice','Triste','Entusiasta','Annoiato/a','Arrabbiato/a','Soddisfatto/a'];
+        $moods = ['Felice','Triste','Entusiasta','Annoiato/a','Arrabbiato/a','Divertito/a'];
 
         foreach ($moods as $mood) {
             $new_mood = new Mood();

@@ -8,7 +8,7 @@
       <div class="container">
           <div class="row justify-content-end">
               <div class="col-2 my-auto">
-                  <button><a href="{{route('admin.days.create',$trip)}}">Aggiungi tappa</a></button>
+                  <button><a href="{{ route('admin.days.create', ['trip' => $trip->id]) }}">Aggiungi giornata</a></button>
               </div>
               <h2 class="title text-center col-8 py-5 ">{{($trip->location)}}</h2>
               <div class="col-2 my-auto">
@@ -19,10 +19,41 @@
               </div>
           </div>
       </div>
-      <div class="section">
-        @foreach ($trip->days as $day)
-          <div>{{$day->title}}</div>
-        @endforeach
+      <div class="container">
+        <div class="row row-cols-1">
+          @foreach ($trip->days as $day)
+          <div class="card mb-4 p-0">
+            <div class="bg_image">
+              <div class="d-flex justify-content-between gap-3 mb-3">
+                <div class="d-flex gap-3">
+                  <a href="{{route('admin.days.show', $day)}}" class="link-underline link-underline-opacity-0">
+                    <h5 class="card-title">{{$day->title}}</h5>
+                  </a>
+                  <p class="card-text">
+                    @if ($day->mood)
+                      @if ($day->mood->id === 1)
+                          <i class="fa-regular fa-face-smile"></i>
+                      @elseif ($day->mood->id === 2)
+                          <i class="fa-regular fa-face-sad-cry"></i>
+                      @elseif ($day->mood->id === 3)
+                          <i class="fa-regular fa-face-laugh-beam"></i>
+                      @elseif ($day->mood->id === 4)
+                          <i class="fa-regular fa-face-tired"></i>
+                      @elseif ($day->mood->id === 5)
+                          <i class="fa-regular fa-face-angry"></i>
+                      @elseif ($day->mood->id === 6)
+                          <i class="fa-regular fa-face-laugh-squint"></i>
+                      @endif
+                    @endif
+                </p>
+                </div>
+                <p class="card-text">{{$day->date}}</p>
+              </div>
+              <p class="card-text">{{$day->description}}</p>
+            </div>
+          </div>
+          @endforeach
+        </div> 
       </div>
 
 

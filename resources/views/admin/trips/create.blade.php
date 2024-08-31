@@ -14,22 +14,22 @@
             @csrf
     
             <div class="form-group mb-4">
-                <label for="title">Destinazione *</label>
+                <label for="location">Destinazione *</label>
                 <input type="text" required class="form-control" id="location" placeholder="Inserisci la destinazione del viaggio" name="location" value="{{ old('location') }}" maxlength="255">
             </div>
     
               <div class="form-group mb-4">
-                <label for="description">Descrizione</label>
+                <label for="description">Descrizione *</label>
                 <textarea name="description" required id="description" cols="80" rows="5" placeholder="Descrizione del viaggio" class="form-control">{{ old('description') }}</textarea>
               </div>
     
             <div class="row row-cols-2 mb-4">
                 <div class="form-group">
-                    <label for="rooms">Data di inizio *</label>
+                    <label for="start_date">Data di inizio *</label>
                     <input type="date" required class="form-control" id="start_date" name="start_date" placeholder="Data inizio viaggio" value="{{ old('start_date') }}">
                 </div>
                 <div class="form-group">
-                    <label for="rooms">Data di fine</label>
+                    <label for="end_date">Data di fine</label>
                     <input type="date" class="form-control" id="end_date" name="end_date" placeholder="Data fine viaggio" value="{{ old('end_date') }}">
                 </div>
             </div>          

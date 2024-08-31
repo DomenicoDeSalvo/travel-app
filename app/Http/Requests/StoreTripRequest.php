@@ -27,7 +27,7 @@ class StoreTripRequest extends FormRequest
             'description' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
-            'user_id' => 'exist:users,id',
+            'user_id' => 'exists:users,id',
         
         ];
     }

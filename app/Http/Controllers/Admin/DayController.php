@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDayRequest;
 use App\Http\Requests\UpdateDayRequest;
 use App\Models\Day;
 use App\Models\Mood;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,31 +24,40 @@ class DayController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        $trip_id = $request->query('trip');
 
+        if (!$trip_id) {
+            abort(404, "Trip ID non trovato.");
+        }
         $moods = Mood::all();
 
-        return view('admin.days.create' , compact('moods'));
+        return view('admin.days.create' , compact('moods' , 'trip_id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreDayRequest $request)
-    {
-        $form_data = $request->validated();
-        $form_data['user_id'] = Auth::user()->id;
+{
+    $form_data = $request->validated();
+    $trip = Trip::findOrFail($form_data['trip_id']); 
 
-        if ($request->has('mood')) {
-            $form_data['mood_id'] = $request->mood;
-        }
-
-        $new_day = Day::create($form_data);
-
-        return to_route('admin.days.show', $new_day);
-
+    if ($trip->user_id !== Auth::id()) {
+        abort(403, "Non autorizzato a modificare questo viaggio.");
     }
+
+    $form_data['user_id'] = Auth::user()->id;
+
+    if ($request->has('mood')) {
+        $form_data['mood_id'] = $request->mood;
+    }
+
+    $new_day = Day::create($form_data);
+
+    return to_route('admin.days.show', $new_day);
+}
 
     /**
      * Display the specified resource.
