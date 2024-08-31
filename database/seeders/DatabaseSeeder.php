@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             MoodSeeder::class,
             UserSeeder::class,
             TripSeeder::class,
-            DaySeeder::class
+            DaySeeder::class,
+            StageSeeder::class
         ]);
     }
 }

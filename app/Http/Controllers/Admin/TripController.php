@@ -18,7 +18,7 @@ class TripController extends Controller
     public function index(Request $request)
     {
         $logged_user_id = Auth::user()->id;
-        $trips = Trip::where('user_id', $logged_user_id)->get();
+        $trips = Trip::where('user_id', $logged_user_id)->orderBy('start_date', 'desc')->get();
 
         return view('admin.trips.index', compact('trips'));
     }
@@ -54,6 +54,10 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
+
+        $trip->load(['days' => function($query) {
+            $query->orderBy('date', 'desc'); 
+        }]);
 
         if ($trip->user_id !== Auth::id()) {
             return to_route('admin.trips.index');

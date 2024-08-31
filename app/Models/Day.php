@@ -27,4 +27,9 @@ class Day extends Model
     {
         return $this->belongsTo(Trip::class);
     }
+
+    public function stages()
+    {
+        return $this->hasMany(Stage::class);
+    }
 }

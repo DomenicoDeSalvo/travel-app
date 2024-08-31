@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDayRequest;
-use App\Http\Requests\UpdateDayRequest;
+use App\Http\Requests\StoreStageRequest;
+use App\Http\Requests\UpdateStageRequest;
 use App\Models\Day;
 use App\Models\Mood;
-use App\Models\Trip;
+use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DayController extends Controller
+class StageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,27 +26,28 @@ class DayController extends Controller
      */
     public function create(Request $request)
     {
-        $trip_id = $request->query('trip');
+        $day_id = $request->query('day');
 
-        if (!$trip_id) {
-            abort(404, "Trip ID non trovato.");
+        if (!$day_id) {
+            abort(404, "Day ID non trovato.");
         }
+
         $moods = Mood::all();
 
-        return view('admin.days.create' , compact('moods' , 'trip_id'));
+        return view('admin.stages.create' , compact('day_id' , 'moods'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDayRequest $request)
+    public function store(StoreStageRequest $request)
     {
         $form_data = $request->validated();
-        $trip = Trip::findOrFail($form_data['trip_id']); 
+        $day = Day::findOrFail($form_data['day_id']); 
 
-        if ($trip->user_id !== Auth::id()) {
+        if ($day->user_id !== Auth::id()) {
             abort(403, "Non autorizzato a modificare questo viaggio.");
-    }
+        }
 
         $form_data['user_id'] = Auth::user()->id;
 
@@ -54,46 +55,44 @@ class DayController extends Controller
             $form_data['mood_id'] = $request->mood;
         }
 
-        $new_day = Day::create($form_data);
+        $new_stage = Stage::create($form_data);
 
-    return to_route('admin.days.show', $new_day);
+        return to_route('admin.stage.show', $new_stage);
 }
 
     /**
      * Display the specified resource.
      */
-    public function show(Day $day)
+    public function show(Stage $stage)
     {
-        if ($day->user_id !== Auth::id()) {
+        if ($stage->user_id !== Auth::id()) {
             return to_route('admin.trips.index');
         }
-        $day->load('trip', 'mood');
+        $stage->load('day' , 'mood');
 
         $moods = Mood::all();
 
-        return view('admin.days.show', compact('day', 'moods'));
+        return view('admin.stages.show', compact('stage', 'moods'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Day $day)
+    public function edit(Stage $stage)
     {
-
         $moods = Mood::all();
 
-        return view('admin.days.edit', compact('day' ,'moods' ));
-
+        return view('admin.stages.edit', compact('stage' ,'moods' ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDayRequest $request, Day $day)
+    public function update(UpdateStageRequest $request, Stage $stage)
     {
         $form_data = $request->validated();
 
-        if ($day->user_id !== Auth::id()) {
+        if ($stage->user_id !== Auth::id()) {
             return to_route('admin.trips.index');
         }
 
@@ -101,20 +100,20 @@ class DayController extends Controller
             $form_data['mood_id'] = $request->mood;
         }
         
-        $day->update($form_data);
+        $stage->update($form_data);
 
-        return to_route('admin.days.show', $day);
+        return to_route('admin.stages.show', $stage);
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Day $day)
+    public function destroy(Stage $stage)
     {
-        $tripId = $day->trip_id;
-        $day->delete();
+        $dayId = $stage->day_id;
+        $stage->delete();
 
-        return to_route('admin.trips.show', $tripId);
+        return to_route('admin.days.show', $dayId);
     }
 }
