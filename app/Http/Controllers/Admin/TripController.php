@@ -54,6 +54,11 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
+
+        if ($trip->user_id !== Auth::id()) {
+            return to_route('admin.trips.index');
+        }
+
         return view('admin.trips.show', compact('trip'));
     }
 
@@ -62,6 +67,11 @@ class TripController extends Controller
      */
     public function edit(Trip $trip)
     {
+
+        if ($trip->user_id !== Auth::id()) {
+            return to_route('admin.trips.index');
+        }
+
         return view('admin.trips.edit', compact('trip'));
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DayController;
 use App\Http\Controllers\Admin\TripController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::middleware(['auth', 'verified'])
 ->prefix('admin')
 ->group(function(){
     Route::resource('trips', TripController::class);
+    Route::resource('days', DayController::class);
 });
 
 require __DIR__.'/auth.php';

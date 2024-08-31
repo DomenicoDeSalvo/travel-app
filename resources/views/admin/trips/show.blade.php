@@ -5,20 +5,25 @@
 @section('content')
 
     <section class="show">
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-2 my-auto">
-                    <button><a href="{{route('admin.days.create',$trip)}}">Aggiungi tappa</a></button>
-                </div>
-                <h2 class="title text-center col-8 py-5 ">{{($trip->location)}}</h2>
-                <div class="col-2 my-auto">
-                    <div class="d-flex justify-content-evenly  align-items-center gap-3">
-                        <button><a href="{{route('admin.trips.edit',$trip)}}">Modifica</a></button>
-                        <button data-bs-toggle="modal" data-bs-target="#modal-{{$trip->id}}">Elimina</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="container">
+          <div class="row justify-content-end">
+              <div class="col-2 my-auto">
+                  <button><a href="{{route('admin.days.create',$trip)}}">Aggiungi tappa</a></button>
+              </div>
+              <h2 class="title text-center col-8 py-5 ">{{($trip->location)}}</h2>
+              <div class="col-2 my-auto">
+                  <div class="d-flex justify-content-evenly  align-items-center gap-3">
+                      <button><a href="{{route('admin.trips.edit',$trip)}}">Modifica</a></button>
+                      <button data-bs-toggle="modal" data-bs-target="#modal-{{$trip->id}}">Elimina</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="section">
+        @foreach ($trip->days as $day)
+          <div>{{$day->title}}</div>
+        @endforeach
+      </div>
 
 
         {{-- MODALE ELIMINAZIONE --}}
