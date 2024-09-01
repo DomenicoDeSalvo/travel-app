@@ -38,4 +38,15 @@ body {
     color: var(--blue);
 }
 
+//MODALI
+.modal{
+    color: var(--cian);
+    --bs-card-border-color: var(--blue);
+}
+
+.modal-header{
+    background-color: var(--blue);
+    color: var(--white);
+}
+
 

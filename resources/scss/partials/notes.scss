@@ -1,25 +1,34 @@
-.carousel_notes{
 
-    
+
+.slides{
+    overflow-x: auto;
+    text-wrap: nowrap;
+
     .card{
         aspect-ratio: 1;
         
     }
-    
-    .card-body{
+    .note{
         background-image: url(/img/postb.jpg);
         background-size: cover;
         background-repeat: no-repeat;
+        margin-right: 10px;
+        width: 250px;
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
+    .hand{
+        text-wrap: wrap;
+
+    }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
     width: 5%;
     height: 15%;
-    background-color: var(--yellow);
-}
+    background-color: transparent;
 }
