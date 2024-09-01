@@ -27,4 +27,9 @@ class Stage extends Model
     {
         return $this->belongsTo(Mood::class);
     }
+
+    public function images()
+    {
+        return $this->hasMany(StageImage::class);
+    }
 }

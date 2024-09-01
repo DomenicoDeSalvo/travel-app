@@ -9,7 +9,7 @@
         <h3>Aggiungi una tappa</h3>
     </div>
     <div class="container">
-        <form action="{{route('admin.stages.store')}}" method="POST">
+        <form action="{{route('admin.stages.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" id="day_id" name="day_id" value="{{$day_id}}">
@@ -27,29 +27,36 @@
             <div class="row row-cols-2 mb-4">
                 <div class="form-group mb-4">
                     <label for="thumb" class="form-label">Anteprima</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb" >
+                    <input class="form-control" type="file" id="thumb" name="thumb">
                 </div>
                 <div class="form-group">
                     <label for="mood_id">Umore</label>
                     <select class="form-control" name="mood_id" id="mood_id">
-                    <option value=""> -- Come è andata? -- </option>
-                    @foreach($moods as $mood) 
-                        <option @selected( $mood->id == old('mood_id') ) value="{{ $mood->id }}"> {{ $mood->name }}</option>
-                    @endforeach
+                        <option value=""> -- Come è andata? -- </option>
+                        @foreach($moods as $mood) 
+                            <option @selected( $mood->id == old('mood_id') ) value="{{ $mood->id }}"> {{ $mood->name }}</option>
+                        @endforeach
                     </select>
                 </div>
-            </div>          
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="images" class="form-label">Carica Immagini</label>
+                <input class="form-control" type="file" id="images" name="images[]" multiple>
+                <small class="text-muted">Puoi caricare più di un'immagine.</small>
+            </div>
+    
             <div class="mb-4 fw-lighter">
                 <p>
                     I campi contrassegnati con l'asterisco (*) sono obbligatori
                 </p>
             </div>
               
-            <button type="submit" >Aggiungi</button>
+            <button type="submit" class="btn btn-primary">Aggiungi</button>
     
         </form>
 
-</div>
+    </div>
     <div class="container"> 
         @if ($errors->any())
             <div class="alert alert-danger mt-3">
