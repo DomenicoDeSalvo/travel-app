@@ -3,9 +3,9 @@
 @section('title', 'Aggiungi viaggio')
 
 @section('content')
-<section class="create">
+<section class="create my-5">
 
-    <div class="container mt-5">
+    <div class="container">
         <h3>Aggiungi un viaggio</h3>
     </div>
     <div class="container">

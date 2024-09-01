@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <section class="edit">
-        <div class="container mt-5">
+    <section class="edit my-5">
+        <div class="container ">
             <h3>Modifica viaggio</h3>
         </div>
         <div class="container">

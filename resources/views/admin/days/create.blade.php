@@ -3,9 +3,9 @@
 @section('title', 'Aggiungi giornata')
 
 @section('content')
-<section class="create">
+<section class="create my-5">
 
-    <div class="container mt-5">
+    <div class="container">
         <h3>Aggiungi una giornata</h3>
     </div>
     <div class="container">

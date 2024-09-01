@@ -6,7 +6,7 @@
 
 @section('content')
 
-<section class="days_show">
+<section class="days_show my-5">
     <div class="container">
         <div class="row justify-content-end">
             <div class="col-2 my-auto">
