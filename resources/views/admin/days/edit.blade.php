@@ -7,7 +7,7 @@
 
     <section class="edit my-5">
         <div class="container ">
-            <h3>Modifica giornata</h3>
+            <h3 class="title">Modifica giornata</h3>
         </div>
         <div class="container">
             <form id="edit-form" action="{{route('admin.days.update', $day)}}" method="POST" enctype="multipart/form-data">

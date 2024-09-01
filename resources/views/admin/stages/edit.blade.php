@@ -6,7 +6,7 @@
 
 <section class="edit my-5">
     <div class="container">
-        <h3>Modifica tappa</h3>
+        <h3 class="title">Modifica tappa</h3>
     </div>
     <div class="container">
         <form id="edit-form" action="{{route('admin.stages.update', $stage)}}" method="POST" enctype="multipart/form-data">

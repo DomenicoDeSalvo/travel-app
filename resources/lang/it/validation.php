@@ -4,7 +4,7 @@ return [
     'accepted' => 'Il campo :attribute deve essere accettato.',
     'active_url' => 'Il campo :attribute non è un URL valido.',
     'after' => 'Il campo :attribute deve essere una data successiva al :date.',
-    'after_or_equal' => 'Il campo :attribute deve essere una data successiva o uguale al :date.',
+    'after_or_equal' => 'Il campo "Data di fine" deve essere una data successiva o uguale alla data di inizio.',
     'alpha' => 'Il campo :attribute può contenere solo lettere.',
     'alpha_dash' => 'Il campo :attribute può contenere solo lettere, numeri e trattini.',
     'alpha_num' => 'Il campo :attribute può contenere solo lettere e numeri.',

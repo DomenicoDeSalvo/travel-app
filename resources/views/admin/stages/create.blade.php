@@ -6,7 +6,7 @@
 <section class="create my-5">
 
     <div class="container">
-        <h3>Aggiungi una tappa</h3>
+        <h3 class="title">Aggiungi una tappa</h3>
     </div>
     <div class="container">
         <form action="{{route('admin.stages.store')}}" method="POST" enctype="multipart/form-data">

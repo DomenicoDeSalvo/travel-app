@@ -10,15 +10,19 @@
     <div class="container">
         <div class="row justify-content-end">
             <div class="col-2 my-auto">
-                <a href="{{ route('admin.stages.create', ['day' => $day->id]) }}" class="btn btn-primary">Aggiungi una tappa</a>
+                <button>
+                    <a href="{{ route('admin.stages.create', ['day' => $day->id]) }}">Aggiungi una tappa</a>
+                </button>
             </div>
-            <div class="title text-center col-8 py-3">
+            <div class="title text-center col-8 py-2">
                 <h2>{{ $day->title }}</h2>
             </div>
             <div class="col-2 my-auto">
                 <div class="d-flex justify-content-evenly align-items-center gap-3">
-                    <a href="{{ route('admin.days.edit', $day) }}" class="btn btn-secondary">Modifica</a>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}">Elimina</button>
+                    <button>
+                        <a href="{{ route('admin.days.edit', $day) }}">Modifica</a>
+                    </button>
+                    <button class="bg_orange" data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}">Elimina</button>
                 </div>
             </div>
         </div>
@@ -28,7 +32,7 @@
     </div>
 
     <div class="container">
-        <div>Data: {{ $day->date }}</div>
+        <div>Data: {{ \Carbon\Carbon::parse($day->date)->format('d-m-Y') }}</div>
         <div>
             @if ($day->mood)
                 @if ($day->mood->id === 1)
@@ -222,3 +226,5 @@
     </div>
 </section>
 @endsection
+
+

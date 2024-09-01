@@ -6,7 +6,7 @@
 <section class="create my-5">
 
     <div class="container">
-        <h3>Aggiungi un viaggio</h3>
+        <h3 class="title">Aggiungi un viaggio</h3>
     </div>
     <div class="container">
         <form action="{{route('admin.trips.store')}}" method="POST"

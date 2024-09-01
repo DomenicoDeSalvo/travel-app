@@ -25,7 +25,7 @@ class UpdateTripRequest extends FormRequest
             'location' => 'required|string|max:255',
             'description' => 'required|string',
             'start_date' => 'required|date',
-            'end_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'user_id' => 'exists:users,id',
             
         ];

@@ -46,7 +46,7 @@
                                 @endif
                             </p>
                         </div>
-                        <p class="card-text">{{ $day->date }}</p>
+                        <p class="card-text">{{ \Carbon\Carbon::parse($day->date)->format('d-m-Y') }}</p>
                     </div>
                     <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
                         <p class="card-text hand">{{ $day->description }}</p>
@@ -106,3 +106,4 @@
 </section>
 
 @endsection
+

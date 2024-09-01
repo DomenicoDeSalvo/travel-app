@@ -6,7 +6,7 @@
 <section class="create my-5">
 
     <div class="container">
-        <h3>Aggiungi una giornata</h3>
+        <h3 class="title">Aggiungi una giornata</h3>
     </div>
     <div class="container">
         <form action="{{route('admin.days.store')}}" method="POST">

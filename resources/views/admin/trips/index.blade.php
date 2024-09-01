@@ -30,13 +30,13 @@
                                 </a>
                                 <div class="dates hand mt-4">
                                     <div class="mb-2">
-                                        {{$trip->start_date}}  
+                                        {{ \Carbon\Carbon::parse($trip->start_date)->format('d-m-Y') }}
                                     </div>
                                     <div class="mb-2">
                                         @if(is_null($trip->end_date))
                                             <span> In corso </span>
                                         @else
-                                            {{$trip->end_date}}
+                                            {{ \Carbon\Carbon::parse($trip->end_date)->format('d-m-Y') }}
                                         @endif
                                     </div>  
                                 </div>
