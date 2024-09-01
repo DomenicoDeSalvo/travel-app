@@ -3,10 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Day;
-use App\Models\Mood;
-use App\Models\Trip;
-use Faker\Generator as Faker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DaySeeder extends Seeder
@@ -14,24 +10,35 @@ class DaySeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(Faker $faker): void
+    public function run(): void
     {
-        $trip_ids = Trip::all()->pluck('id')->all();
-        $mood_ids = Mood::all()->pluck('id')->all();
+        // Percorso al file CSV nella stessa cartella del seeder
+        $csvFile = __DIR__ . '/days.csv';
+        // Leggi il file CSV
+        $csvData = array_map('str_getcsv', file($csvFile));
+        
+        // Rimuovi l'intestazione del CSV
+        $header = array_shift($csvData);
 
-        for ($i = 0; $i < 30; $i++) {
-            $trip_id = $faker->randomElement($trip_ids);
-            $user_id = Trip::find($trip_id)->user_id;
+        foreach ($csvData as $row) {
+            // Verifica che il numero di colonne corrisponda a quello dell'intestazione
+            if (count($row) == count($header)) {
+                // Associa ogni riga del CSV con le intestazioni
+                $dayData = array_combine($header, $row);
 
-            $new_day = new Day();
-            $new_day->trip_id = $faker->randomElement($trip_ids);
-            $new_day->user_id = $user_id;
-            $new_day->mood_id = $faker->optional(weight: 0.9)->randomElement($mood_ids);
-            $new_day->title = $faker->sentence();
-            $new_day->date = $faker->dateTime();
-            $new_day->description = $faker->paragraph();
-
-            $new_day->save();
-        };
+                // Crea un nuovo Day usando i dati dal CSV
+                Day::create([
+                    'trip_id' => $dayData['trip_id'],
+                    'user_id' => $dayData['user_id'],
+                    'mood_id' => $dayData['mood_id'] ?: null, // Se mood_id è vuoto, imposta a null
+                    'title' => $dayData['title'],
+                    'date' => $dayData['date'],
+                    'description' => $dayData['description'],
+                ]);
+            } else {
+                // Puoi loggare un errore o saltare la riga se il numero di colonne non corrisponde
+                // Log::warning("Riga CSV non valida: " . implode(",", $row));
+            }
+        }
     }
 }

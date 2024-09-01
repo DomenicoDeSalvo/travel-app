@@ -1,7 +1,39 @@
 .navbar, footer{
     background-color: var(--lightblue);
+    color:white;
+    font-size: 25px;
+    a{
+        color: white;
+        &:hover{
+            color: var(--yellow);
+        }
+    }
+    
 }
 
 .navbar{
     margin-top: 20px;
+
+    img{
+        height: 80px;
+    }
 }
+
+// .navbar{
+//     background-color: var(--purple);
+    
+
+    
+
+//     button{
+//         color: var(--white);
+//         border: var(--white);
+//     }
+
+//     a{
+//         color: var(--white);
+//         &:hover{
+//             color: var(--yellow);
+//         }
+//     }
+// }

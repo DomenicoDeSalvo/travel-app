@@ -3,6 +3,12 @@
 //Colori e regole generali
 @use "./partials/layout.scss";
 
+//Pagine di servizio
+@use "./partials/auth.scss";
+
+//Bottoni
+@use "./partials/buttons.scss";
+
 //Header e footer
 @use "./partials/app.scss";
 

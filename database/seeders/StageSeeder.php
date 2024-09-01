@@ -2,37 +2,43 @@
 
 namespace Database\Seeders;
 
-use App\Models\Day;
-use App\Models\Mood;
 use App\Models\Stage;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
-
 
 class StageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(Faker $faker): void
+    public function run(): void
     {
-        $day_ids = Day::all()->pluck('id')->all();
-        $mood_ids = Mood::all()->pluck('id')->all();
+        // Percorso al file CSV nella stessa cartella del seeder
+        $csvFile = __DIR__ . '/stages.csv';
+        // Leggi il file CSV
+        $csvData = array_map('str_getcsv', file($csvFile));
+        
+        // Rimuovi l'intestazione del CSV
+        $header = array_shift($csvData);
 
-        for ($i = 0; $i < 30; $i++) {
-            $day_id = $faker->randomElement($day_ids);
-            $user_id = Day::find($day_id)->user_id;
+        foreach ($csvData as $row) {
+            // Verifica che il numero di colonne corrisponda a quello dell'intestazione
+            if (count($row) == count($header)) {
+                // Associa ogni riga del CSV con le intestazioni
+                $stageData = array_combine($header, $row);
 
-            $new_stage = new Stage();
-            $new_stage->day_id = $faker->randomElement($day_ids);
-            $new_stage->user_id = $user_id;
-            $new_stage->mood_id = $faker->optional(weight: 0.9)->randomElement($mood_ids);
-            $new_stage->title = $faker->sentence();
-            $new_stage->thumb = $faker->optional(weight: 0.9)->imageUrl();
-            $new_stage->description = $faker->paragraph();
-
-            $new_stage->save();
-        };
+                // Crea un nuovo Stage usando i dati dal CSV
+                Stage::create([
+                    'day_id' => $stageData['day_id'],
+                    'user_id' => $stageData['user_id'],
+                    'mood_id' => $stageData['mood_id'] ?: null, // Se mood_id è vuoto, imposta a null
+                    'title' => $stageData['title'],
+                    'thumb' => $stageData['thumb'] ?: null, // Se thumb è vuoto, imposta a null
+                    'description' => $stageData['description'],
+                ]);
+            } else {
+                // Puoi loggare un errore o saltare la riga se il numero di colonne non corrisponde
+                // Log::warning("Riga CSV non valida: " . implode(",", $row));
+            }
+        }
     }
 }
