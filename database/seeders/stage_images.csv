@@ -1,0 +1,12 @@
+stage_id,image_path
+1,stages/1/image1.jpg
+1,stages/1/image2.jpg
+1,stages/1/image3.jpg
+2,stages/2/image1.jpg
+2,stages/2/image2.jpg
+3,stages/3/image1.jpg
+3,stages/3/image2.jpg
+3,stages/3/image3.jpg
+4,stages/4/image1.jpg
+4,stages/4/image2.jpg
+4,stages/4/image3.jpg

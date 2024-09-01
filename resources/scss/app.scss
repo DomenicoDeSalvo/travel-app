@@ -12,9 +12,20 @@
 //Header e footer
 @use "./partials/app.scss";
 
+//Note
+@use "./partials/notes.scss";
+
+//welcome
+@use "./partials/welcome.scss";
+
 //VIAGGI
 //Index viaggi
 @use"./partials/trips/trips_index.scss";
 
 //Show viaggi
 @use"./partials/trips/trips_show.scss";
+
+//GIORNATE
+//Show giornate
+@use"./partials/days/days_show.scss";
+

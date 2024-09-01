@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="text-center pb-3">
-            <h4>Parte di: <a href="{{ route('admin.trips.show', $day->trip->id) }}">{{ $day->trip->location }}</a></h4>
+            <h4>Parte di: <a class="trip" href="{{ route('admin.trips.show', $day->trip->id) }}">{{ $day->trip->location }}</a></h4>
         </div>
     </div>
 
@@ -49,112 +49,91 @@
         <div>Riassunto: {{ $day->description }}</div>
     </div>
 
-    <!-- Carosello delle tappe -->
-    <div class="container mb-5">
-        <div id="carouselStages{{ $day->id }}" class="carousel slide" data-bs-ride="false">
-            <div class="carousel-inner">
-                @foreach ($day->stages as $stage)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <div class="card mb-4 p-4">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $stage->title }}</h5>
-                                <p class="card-text">
-                                    @if ($stage->mood)
-                                        <i class="fa-regular fa-face-{{ $stage->mood->icon_class }}"></i>
-                                    @endif
-                                </p>
-                                <p class="card-text">{{ $stage->description }}</p>
-                                <div class="text-center">
-
-                                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#galleryModal{{ $stage->id }}">Galleria</button>
-                                    <a href="{{ route('admin.stages.edit', $stage) }}" class="btn btn-secondary">Modifica</a>
-                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-stage-{{$stage->id}}">Elimina</button>
+    <!-- Contenitore per carosello delle tappe e le note -->
+    <div class="container">
+        <div class="row">
+            <!-- Colonna delle note -->
+            <div class="col-lg-3 mb-4 mb-lg-0">
+                <div class="notes-container p-3" style="height: 100%; overflow-y: auto; background-image: url({{ asset('img/postb.jpg') }}); background-size: cover; background-repeat: no-repeat; border-radius: 5px;">
+                    <h5 class="mb-3">Annotazioni del giorno</h5>
+                    <button class="btn btn-primary mb-3">
+                        <a href="{{ route('admin.notes.create', ['day' => $day->id]) }}" style="color: white;">Scrivi una nota</a>
+                    </button>
+                    @if($day->notes->isEmpty())
+                        <p>Ancora nessuna annotazione</p>
+                    @else
+                        @foreach ($day->notes as $note)
+                            <div class="note mb-3">
+                                <p>{{ $note->text }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('admin.notes.edit', $note) }}" class="btn btn-secondary btn-sm">Modifica</a>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-note-{{$note->id}}">Elimina</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselStages{{ $day->id }}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselStages{{ $day->id }}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
 
-    <!-- Carosello delle note -->
-    <div class="container">
-        <div class="d-flex align-items-start justify-content-between">
-            <h3 class="text-center">Annotazioni del giorno</h3>
-            <a href="{{ route('admin.notes.create', ['day' => $day->id]) }}" class="btn btn-primary">Scrivi una nota</a>
-        </div>
-
-        @if($day->notes->isEmpty())
-            <div class="my-5">
-                <h5>Ancora nessuna annotazione</h5>
-            </div>
-        @else
-            <div id="carouselNotes{{ $day->id }}" class="carousel slide" data-bs-ride="false">
-                <div class="carousel-inner">
-                    @foreach ($day->notes->chunk(4) as $chunk)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <div class="row">
-                                @foreach ($chunk as $note)
-                                    <div class="col-3 d-flex align-items-stretch">
-                                        <div class="card flex-fill mb-3">
-                                            <div class="card-body">
-                                                <p>{{ $note->text }}</p>
-                                                <div>
-                                                    <a href="{{ route('admin.notes.edit', $note) }}" class="btn btn-secondary">Modifica</a>
-                                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-note-{{$note->id}}">Elimina</button>
-                                                </div>
-                                            </div>
+                            {{-- MODALE ELIMINAZIONE NOTA --}}
+                            <div class="modal" id="modal-note-{{$note->id}}" tabindex="-1" aria-labelledby="modal-label-{{$day->id}}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Elimina Nota</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Vuoi eliminare questa nota?</p>
+                                        </div>
+                                        <div class="modal-footer border-0">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <form action="{{ route('admin.notes.destroy', $note) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger">Sì</button>
+                                            </form>
                                         </div>
                                     </div>
-
-                                    {{-- MODALE ELIMINAZIONE NOTA --}}
-                                    <div class="modal" id="modal-note-{{$note->id}}" tabindex="-1" aria-labelledby="modal-label-note" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Elimina Nota</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Vuoi eliminare questa nota?</p>
-                                                </div>
-                                                <div class="modal-footer border-0">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                    <form action="{{ route('admin.notes.destroy', $note) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger">Sì</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
-                @if ($day->notes->count() > 4)
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselNotes{{ $day->id }}" data-bs-slide="prev">
+            </div>
+
+            <!-- Carosello delle tappe -->
+            <div class="col-lg-9">
+                <div id="carouselStages{{ $day->id }}" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-inner">
+                        @foreach ($day->stages as $stage)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                <div class="card mb-4 p-4">
+                                    <div class="card-body" style="background-image: url({{ $stage->thumb ? asset('storage/' . $stage->thumb) : asset('img/default_thumb.jpg') }}); background-size: cover; background-repeat: no-repeat;">
+                                        <h5 class="card-title">{{ $stage->title }}</h5>
+                                        <p class="card-text">
+                                            @if ($stage->mood)
+                                                <i class="fa-regular fa-face-{{ $stage->mood->icon_class }}"></i>
+                                            @endif
+                                        </p>
+                                        <p class="card-text">{{ $stage->description }}</p>
+                                        <div class="text-center">
+                                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#galleryModal{{ $stage->id }}">Galleria</button>
+                                            <a href="{{ route('admin.stages.edit', $stage) }}" class="btn btn-secondary">Modifica</a>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-stage-{{$stage->id}}">Elimina</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselStages{{ $day->id }}" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselNotes{{ $day->id }}" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselStages{{ $day->id }}" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
-                @endif
+                </div>
             </div>
-        @endif
+        </div>
     </div>
 
     {{-- MODALE GALLERIA TAPPA --}}
@@ -196,7 +175,7 @@
 
     {{-- MODALE ELIMINAZIONE TAPPA --}}
     @foreach ($day->stages as $stage)
-        <div class="modal" id="modal-stage-{{$stage->id}}" tabindex="-1" aria-labelledby="modal-label-{{$stage->id}}" aria-hidden="true">
+        <div class="modal fade" id="modal-stage-{{$stage->id}}" tabindex="-1" aria-labelledby="modal-label-{{$stage->id}}" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -220,7 +199,7 @@
     @endforeach
 
     {{-- MODALE ELIMINAZIONE GIORNATA --}}
-    <div class="modal" id="modal-day-{{$day->id}}" tabindex="-1" aria-labelledby="modal-label-day" aria-hidden="true">
+    <div class="modal fade" id="modal-day-{{$day->id}}" tabindex="-1" aria-labelledby="modal-label-day" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

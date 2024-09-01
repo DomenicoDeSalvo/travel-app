@@ -5,7 +5,7 @@
 @section('content')
 
 <section class="edit">
-    <div class="container">
+    <div class="container mt-5">
         <h3>Modifica tappa</h3>
     </div>
     <div class="container">
@@ -25,10 +25,6 @@
             </div>
 
             <div class="row row-cols-2 mb-4">
-                <div class="form-group mb-4">
-                    <label for="thumb" class="form-label">Anteprima</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb">
-                </div>
                 <div class="form-group">
                     <label for="mood_id">Umore</label>
                     <select class="form-control" name="mood_id" id="mood_id">

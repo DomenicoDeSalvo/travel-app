@@ -32,7 +32,6 @@ class StageSeeder extends Seeder
                     'user_id' => $stageData['user_id'],
                     'mood_id' => $stageData['mood_id'] ?: null, // Se mood_id è vuoto, imposta a null
                     'title' => $stageData['title'],
-                    'thumb' => $stageData['thumb'] ?: null, // Se thumb è vuoto, imposta a null
                     'description' => $stageData['description'],
                 ]);
             } else {

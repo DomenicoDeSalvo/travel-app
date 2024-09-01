@@ -5,7 +5,7 @@
 @section('content')
 <section class="create">
 
-    <div class="container">
+    <div class="container mt-5">
         <h3>Aggiungi una giornata</h3>
     </div>
     <div class="container">

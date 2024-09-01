@@ -7,9 +7,12 @@ button{
     background-color: var(--blue);
     color: var(--white);
 
-    // &.bg_orange{
-    //     background-color: var(--orange);
-    // }
+    &.bg_orange{
+        background-color: var(--orange);
+        &:hover{
+            background-color: var(--red);
+        }
+    }
 
     &:hover{
         background-color: var(--cian);

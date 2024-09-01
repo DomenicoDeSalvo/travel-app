@@ -5,16 +5,14 @@
 @section('content')
 
 <section class="show">
-    <div class="container">
-        <div class="row justify-content-end">
-            <div class="col-2 my-auto">
+    <div class="container text-center">
+        <h2 class="title text-center mt-4 mb-2">{{ $trip->location }}</h2>
+        <div class=" my-auto">
+            <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
                 <button><a href="{{ route('admin.days.create', ['trip' => $trip->id]) }}">Aggiungi giornata</a></button>
-            </div>
-            <h2 class="title text-center col-8 py-5">{{ $trip->location }}</h2>
-            <div class="col-2 my-auto">
-                <div class="d-flex justify-content-evenly align-items-center gap-3">
+                <div>
                     <button><a href="{{ route('admin.trips.edit', $trip) }}">Modifica</a></button>
-                    <button data-bs-toggle="modal" data-bs-target="#modal-trip-{{$trip->id}}">Elimina</button>
+                    <button data-bs-toggle="modal" data-bs-target="#modal-trip-{{$trip->id}}"class="bg_orange">Elimina</button>
                 </div>
             </div>
         </div>
@@ -24,12 +22,11 @@
         <div class="row row-cols-1">
             @foreach ($trip->days as $day)
             <div class="card mb-4 p-0">
-                <button data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}">Elimina</button>
                 <div class="bg_image">
                     <div class="d-flex justify-content-between gap-3 mb-3">
                         <div class="d-flex gap-3">
                             <a href="{{ route('admin.days.show', $day) }}" class="link-underline link-underline-opacity-0">
-                                <h5 class="card-title">{{ $day->title }}</h5>
+                                <h5 class="card-title hand">{{ $day->title }}</h5>
                             </a>
                             <p class="card-text">
                                 @if ($day->mood)
@@ -51,7 +48,10 @@
                         </div>
                         <p class="card-text">{{ $day->date }}</p>
                     </div>
-                    <p class="card-text">{{ $day->description }}</p>
+                    <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
+                        <p class="card-text hand">{{ $day->description }}</p>
+                        <button data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}"class="bg_orange">Elimina</button>
+                    </div>
                 </div>
             </div>
 

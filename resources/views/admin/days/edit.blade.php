@@ -6,7 +6,7 @@
 @section('content')
 
     <section class="edit">
-        <div class="container">
+        <div class="container mt-5">
             <h3>Modifica giornata</h3>
         </div>
         <div class="container">
@@ -57,7 +57,6 @@
                         </ul>
                     </div>
                 @endif
-           <    /div>
         </div>
    </section>
 

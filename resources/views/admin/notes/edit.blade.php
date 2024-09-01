@@ -6,7 +6,7 @@
 @section('content')
 
     <section class="edit">
-        <div class="container">
+        <div class="container mt-5">
             <h3>Modifica nota</h3>
         </div>
         <div class="container">

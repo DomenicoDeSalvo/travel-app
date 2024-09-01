@@ -1,0 +1,25 @@
+.carousel_notes{
+
+    
+    .card{
+        aspect-ratio: 1;
+        
+    }
+    
+    .card-body{
+        background-image: url(/img/postb.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 5%;
+    height: 15%;
+    background-color: var(--yellow);
+}
+}

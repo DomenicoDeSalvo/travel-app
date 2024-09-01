@@ -17,11 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('mood_id')->nullable();
             $table->string('title');
-            $table->string('thumb')->nullable();
             $table->text('description');
-            // $table->string('address');
-            // $table->decimal('latitude', $precision = 11, $scale = 8)->default(0);
-            // $table->decimal('longitude', $precision = 11, $scale = 8)->default(0);
             $table->timestamps();
         });
     }

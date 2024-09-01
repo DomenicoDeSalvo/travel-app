@@ -12,8 +12,10 @@
 
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 
     {{-- Fontawesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -35,7 +37,7 @@
                     </a>
                     <li class="nav-item ">
                         <a class="nav-link mb-lg-1" href="{{url('/') }}">
-                            
+                            <img src="{{asset('/img/name.png')}}" alt="">
                         </a>
                     </li>
                 </li>
@@ -73,18 +75,17 @@
         </div>
     </nav>
 
-    <main class="flex-grow-1 pb-5">
+    <main class="flex-grow-1">
         @yield('content')
     </main>
 
-    <footer class="credits">
+    <footer>
         <div class="container">
             <div class="d-flex justify-content-center align-items-baseline gap-4">
                 <p>Sviluppato da</p>
                 <a href="https://www.linkedin.com/in/domenico-de-salvo-3328a0192"> Domenico De Salvo </a>
             </div>   
         </div>
-        
     </footer>
 </body>
 

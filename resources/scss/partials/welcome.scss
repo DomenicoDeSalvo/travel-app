@@ -1,0 +1,17 @@
+.welcome{
+
+    height: 100%;
+
+    .wrapper{
+        background-image:url(../img/page.png) ;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+
+        .intro{
+            max-width: 500px;
+            
+        }
+    }
+}
