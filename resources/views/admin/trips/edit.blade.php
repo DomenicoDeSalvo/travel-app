@@ -33,10 +33,6 @@
                         <input type="date" class="form-control" id="end_date" name="end_date" placeholder="Data fine viaggio" value="{{ old('end_date', $trip->end_date) }}">
                     </div>
                 </div>
-                <div class="form-group mb-4">
-                    <label for="thumb" class="form-label">Anteprima</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb" >
-                </div>
                 <div class="mb-4 fw-lighter">
                    <p>
                        I campi contrassegnati con l'asterisco (*) sono obbligatori

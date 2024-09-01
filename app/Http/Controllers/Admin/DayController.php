@@ -16,10 +16,6 @@ class DayController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +42,7 @@ class DayController extends Controller
 
         if ($trip->user_id !== Auth::id()) {
             abort(403, "Non autorizzato a modificare questo viaggio.");
-    }
+        }
 
         $form_data['user_id'] = Auth::user()->id;
 
@@ -56,8 +52,8 @@ class DayController extends Controller
 
         $new_day = Day::create($form_data);
 
-    return to_route('admin.days.show', $new_day);
-}
+        return to_route('admin.days.show', $new_day);
+    }   
 
     /**
      * Display the specified resource.

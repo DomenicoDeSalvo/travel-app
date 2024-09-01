@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             MoodSeeder::class,
-            UserSeeder::class,
-            TripSeeder::class,
-            DaySeeder::class,
-            StageSeeder::class
+            // UserSeeder::class,
+            // TripSeeder::class,
+            // DaySeeder::class,
+            // StageSeeder::class
         ]);
     }
 }

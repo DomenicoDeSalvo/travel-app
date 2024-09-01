@@ -13,17 +13,16 @@
             <form id="edit-form" action="{{route('admin.stages.update', $stage)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT') 
-            
                 <input type="hidden" id="day_id" name="day_id" value="{{old('day_id' , $stage->day_id)}}">
                 <div class="form-group mb-4">
                    <label for="title">Titolo *</label>
                    <input type="text" required class="form-control" id="title" placeholder="Cosa hai visto" name="title" value="{{ old('title', $stage->title) }}" maxlength="255">
                 </div>
        
-               <div class="form-group mb-4">
+                <div class="form-group mb-4">
                     <label for="description">Descrizione *</label>
                     <textarea name="description" id="description" cols="80" rows="5" placeholder="La tua esperienza" class="form-control">{{ old('description', $stage->description) }}</textarea>
-               </div>
+                </div>
 
                 <div class="row row-cols-2 mb-4">
                     <div class="form-group mb-4">

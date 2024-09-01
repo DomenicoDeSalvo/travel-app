@@ -32,4 +32,9 @@ class Day extends Model
     {
         return $this->hasMany(Stage::class);
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

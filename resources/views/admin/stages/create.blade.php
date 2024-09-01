@@ -19,10 +19,10 @@
                 <input type="text" required class="form-control" id="title" placeholder="Cosa hai visto" name="title" value="{{ old('title') }}" maxlength="255">
             </div>
     
-              <div class="form-group mb-4">
+            <div class="form-group mb-4">
                 <label for="description">Descrizione *</label>
                 <textarea name="description" required id="description" cols="80" rows="5" placeholder="La tua esperienza" class="form-control">{{ old('description') }}</textarea>
-              </div>
+            </div>
     
             <div class="row row-cols-2 mb-4">
                 <div class="form-group mb-4">

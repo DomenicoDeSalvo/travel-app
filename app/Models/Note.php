@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stage extends Model
+class Note extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
         'day_id',
-        'mood_id',
         'user_id',
-        'thumb',
+        'text'
+
     ];
 
     public function day()
@@ -23,8 +21,4 @@ class Stage extends Model
         return $this->belongsTo(Day::class);
     }
 
-    public function mood()
-    {
-        return $this->belongsTo(Mood::class);
-    }
 }

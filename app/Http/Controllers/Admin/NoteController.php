@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreStageRequest;
-use App\Http\Requests\UpdateStageRequest;
+use App\Http\Requests\StoreNoteRequest;
+use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Day;
-use App\Models\Mood;
+use App\Models\Note;
 use App\Models\Stage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class StageController extends Controller
+class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,15 +28,13 @@ class StageController extends Controller
             abort(404, "Day ID non trovato.");
         }
 
-        $moods = Mood::all();
-
-        return view('admin.stages.create' , compact('day_id' , 'moods'));
+        return view('admin.notes.create' , compact('day_id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreStageRequest $request)
+    public function store(StoreNoteRequest $request)
     {
         $form_data = $request->validated();
         $day = Day::findOrFail($form_data['day_id']); 
@@ -46,13 +44,8 @@ class StageController extends Controller
         }
 
         $form_data['user_id'] = Auth::user()->id;
-
-        if ($request->has('mood')) {
-            $form_data['mood_id'] = $request->mood;
-        }
-
-        
-        $new_stage = Stage::create($form_data);
+     
+        $new_note = Note::create($form_data);
 
         return to_route('admin.days.show', $day->id);
     }
@@ -64,31 +57,26 @@ class StageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Stage $stage)
+    public function edit(Note $note)
     {
-        $moods = Mood::all();
 
-        return view('admin.stages.edit', compact('stage' ,'moods' ));
+        return view('admin.notes.edit', compact('note'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStageRequest $request, Stage $stage)
+    public function update(UpdateNoteRequest $request, Note $note)
     {
         $form_data = $request->validated();
 
-        if ($stage->user_id !== Auth::id()) {
+        if ($note->user_id !== Auth::id()) {
             return to_route('admin.trips.index');
         }
-
-        if ($request->has('mood')) {
-            $form_data['mood_id'] = $request->mood;
-        }
         
-        $stage->update($form_data);
+        $note->update($form_data);
 
-        $day = $stage->day;
+        $day = $note->day;
 
         return to_route('admin.days.show', $day->id);
 
@@ -97,10 +85,10 @@ class StageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Stage $stage)
+    public function destroy(Note $note)
     {
-        $dayId = $stage->day_id;
-        $stage->delete();
+        $dayId = $note->day_id;
+        $note->delete();
 
         return to_route('admin.days.show', $dayId);
     }

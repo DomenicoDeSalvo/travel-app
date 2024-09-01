@@ -28,9 +28,6 @@ class StoreStageRequest extends FormRequest
             'mood_id' => 'nullable|exists:moods,id',
             'day_id' => 'required|exists:days,id',
             'thumb' => 'nullable|image',
-            // 'address' => 'required|string|max:255',
-            // 'latitude' => 'required|numeric',
-            // 'longitude' => 'required|numeric',
         ];
     }
 }

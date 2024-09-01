@@ -33,19 +33,19 @@
                             </a>
                             <p class="card-text">
                                 @if ($day->mood)
-                                @if ($day->mood->id === 1)
-                                <i class="fa-regular fa-face-smile"></i>
-                                @elseif ($day->mood->id === 2)
-                                <i class="fa-regular fa-face-sad-cry"></i>
-                                @elseif ($day->mood->id === 3)
-                                <i class="fa-regular fa-face-laugh-beam"></i>
-                                @elseif ($day->mood->id === 4)
-                                <i class="fa-regular fa-face-tired"></i>
-                                @elseif ($day->mood->id === 5)
-                                <i class="fa-regular fa-face-angry"></i>
-                                @elseif ($day->mood->id === 6)
-                                <i class="fa-regular fa-face-laugh-squint"></i>
-                                @endif
+                                    @if ($day->mood->id === 1)
+                                        <i class="fa-regular fa-face-smile"></i>
+                                    @elseif ($day->mood->id === 2)
+                                        <i class="fa-regular fa-face-sad-cry"></i>
+                                    @elseif ($day->mood->id === 3)
+                                        <i class="fa-regular fa-face-laugh-beam"></i>
+                                    @elseif ($day->mood->id === 4)
+                                        <i class="fa-regular fa-face-tired"></i>
+                                    @elseif ($day->mood->id === 5)
+                                        <i class="fa-regular fa-face-angry"></i>
+                                    @elseif ($day->mood->id === 6)
+                                        <i class="fa-regular fa-face-laugh-squint"></i>
+                                    @endif
                                 @endif
                             </p>
                         </div>

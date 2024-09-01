@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('location');
-            $table->string('thumb')->nullable();
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date')->nullable();

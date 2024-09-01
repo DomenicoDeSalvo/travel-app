@@ -23,7 +23,6 @@ class UpdateTripRequest extends FormRequest
     {
         return [
             'location' => 'required|string|max:255',
-            'thumb' => 'nullable|image',
             'description' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
