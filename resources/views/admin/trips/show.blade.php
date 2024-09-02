@@ -50,7 +50,10 @@
                     </div>
                     <div class="d-flex align-items-start justify-content-between gap-3 mb-3">
                         <p class="card-text hand">{{ $day->description }}</p>
-                        <button data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}"class="bg_orange">Elimina</button>
+                        <div class="d-flex flex-column gap-2">
+                            <button><a href="{{ route('admin.days.edit', $day) }}">Modifica</a></button>
+                            <button data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}"class="bg_orange">Elimina</button>
+                        </div>
                     </div>
                 </div>
             </div>

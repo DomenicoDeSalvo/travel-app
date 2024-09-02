@@ -13,35 +13,33 @@
         <div class="my-auto">
             <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
                 <button><a href="{{ route('admin.stages.create', ['day' => $day->id]) }}">Aggiungi una tappa</a></button>
-            <div>
-                <button><a href="{{ route('admin.days.edit', $day) }}">Modifica</a></button>
-                <button class="bg_orange" data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}">Elimina</button>
-            </div>
+                <button class="bg_orange" data-bs-toggle="modal" data-bs-target="#modal-day-{{$day->id}}">Elimina giornata</button>
         </div>
     </div>
 
-    <!-- Contenitore per carosello delle tappe e le note -->
     <div class="container">
         <div class="row">
-            <!-- Carosello delle tappe -->
+            <!-- CAROSELLO TAPPE -->
             <div class="col-lg-12">
                 <div id="carouselStages{{ $day->id }}" class="carousel slide" data-bs-ride="false">
                     <div class="carousel-inner">
                         @foreach ($day->stages as $stage)
                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                <div class="card mb-4 p-4">
+                                <div class="card diary mb-4 p-4">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $stage->title }}</h5>
+                                        <h3 class="card-title">{{ $stage->title }}</h3>
                                         <p class="card-text">
                                             @if ($stage->mood)
                                                 <i class="fa-regular fa-face-{{ $stage->mood->icon_class }}"></i>
                                             @endif
                                         </p>
-                                        <p class="card-text">{{ $stage->description }}</p>
-                                        <div class="text-center">
-                                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#galleryModal{{ $stage->id }}">Galleria</button>
-                                            <a href="{{ route('admin.stages.edit', $stage) }}" class="btn btn-secondary">Modifica</a>
-                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-stage-{{$stage->id}}">Elimina</button>
+                                        <p class="card-text fs-6">{{ $stage->description }}</p>
+                                        <div class="text-center pt-3">
+                                            <button  data-bs-toggle="modal" data-bs-target="#galleryModal{{ $stage->id }}">Galleria</button>
+                                            <button>
+                                                <a href="{{ route('admin.stages.edit', $stage) }}">Modifica</a>
+                                            </button>
+                                            <button class="bg_orange" data-bs-toggle="modal" data-bs-target="#modal-stage-{{$stage->id}}">Elimina</button>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +58,6 @@
             </div>
         </div>
 
-        <!-- Note con scrollbar orizzontale -->
         <div class="row mt-4">
             <div class="col-lg-12">
                 <h5 class="mb-4">Annotazioni del giorno</h5>

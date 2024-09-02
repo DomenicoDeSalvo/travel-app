@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             DaySeeder::class,
             StageSeeder::class,
             NoteSeeder::class,
-            StageImageSeeder::class
         ]);
     }
 }
