@@ -33,7 +33,7 @@
             <ul class="navbar-nav me-auto d-flex align-items-center">
                 <li class="nav-item ">
                     <a class="nav-link mb-lg-1" href="{{url('/') }}">
-                        <img src="{{asset('/img/Logo_White.PNG')}}" alt="">
+                        <img src="{{asset('/img/Logo_white.PNG')}}" alt="">
                     </a>
                     <li class="nav-item ">
                         <a class="nav-link mb-lg-1" href="{{url('/') }}">
